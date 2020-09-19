@@ -15,7 +15,7 @@ class UpdateProcessingPipeline(
         logger.debug("Processing update: {}", update)
         logger.debug("Chat ID: {}", update.chatId)
 
-        val reactions = processors.map { it.process(update) }.filterNotNull()
+        val reactions = processors.mapNotNull { it.process(update) }
 
         when (reactions.size) {
             0 -> {

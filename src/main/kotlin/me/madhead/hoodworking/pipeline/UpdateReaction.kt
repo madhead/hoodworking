@@ -1,3 +1,3 @@
 package me.madhead.hoodworking.pipeline
 
-typealias UpdateReaction = () -> Unit
+typealias UpdateReaction = suspend () -> Unit

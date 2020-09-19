@@ -8,6 +8,7 @@ import io.ktor.features.DefaultHeaders
 import io.ktor.routing.routing
 import io.ktor.util.KtorExperimentalAPI
 import me.madhead.hoodworking.config.koin.configModule
+import me.madhead.hoodworking.config.koin.dbModule
 import me.madhead.hoodworking.config.koin.jsonModule
 import me.madhead.hoodworking.config.koin.pipelineModule
 import me.madhead.hoodworking.config.koin.telegramModule
@@ -24,6 +25,7 @@ fun Application.main() {
                 configModule(environment.config),
                 telegramModule,
                 jsonModule,
+                dbModule,
                 pipelineModule,
         )
     }
