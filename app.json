@@ -1,0 +1,42 @@
+{
+  "name": "Hoodworking",
+  "description": "Telegram bot to gather useful contacts on the hood",
+  "logo": "https://github.com/madhead/hoodworking/raw/master/logo.png",
+  "repository": "https://github.com/madhead/hoodworking",
+  "keywords": [
+    "telegram",
+    "telegram-bot"
+  ],
+  "env": {
+    "GRADLE_TASK": {
+      "description": "Gradle buildpack configuration",
+      "value": "installDist"
+    },
+    "TELEGRAM_BOT_TOKEN": {
+      "description": "Telegram bot token"
+    },
+    "DATABASE_URL": {
+      "description": "Heroku Postgres URL"
+    },
+    "HOODWORKING_LOG_THRESHOLD": {
+      "description": "Log4j 2 app logger level",
+      "required": false,
+      "value": "DEBUG"
+    },
+    "HOODWORKING_LOG_ROOT_THRESHOLD": {
+      "description": "Log4j 2 root logger level",
+      "required": false,
+      "value": "WARN"
+    }
+  },
+  "formation": [
+    {
+      "process": "web",
+      "quantity": 1,
+      "size": "free"
+    }
+  ],
+  "addons": [
+    "heroku-postgresql"
+  ]
+}

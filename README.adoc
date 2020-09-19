@@ -1,0 +1,38 @@
+image:https://www.herokucdn.com/deploy/button.svg[Latest Release,link=https://heroku.com/deploy?template=https://github.com/madhead/hoodworking]
+
+# Hoodworking
+
+## Self-hosting
+
+You can host this bot for free on Heroku using the button at the top of this README if you don't trust me.
+Although, you'll need to configure a few things.
+
+### Telegram Bot
+
+As is is a Telegram bot, you'll need to configure your own bot.
+Just go to the https://t.me/BotFather[@BotFather], run the `/newbot` command and follow the instructions.
+Note the bot API token after the bot is created: you'll need to pass it via `TELEGRAM_BOT_TOKEN` environment variable to the app.
+
+### PostgreSQL
+
+The template includes a free tier setup of https://devcenter.heroku.com/articles/heroku-postgresql[Heroku Postgres], it should be sufficient for a personal use.
+Everything should be configured automatically, and the `DATABASE_URL` environment variable should be populated.
+
+### Other environment variables
+
+Just leave the defaults:
+
+[source,shell]
+----
+GRADLE_TASK=installDist
+HOODWORKING_LOG_THRESHOLD=DEBUG
+HOODWORKING_LOG_ROOT_THRESHOLD=WARN
+----
+
+## Troubleshooting
+
+### The bot doesn't respond to my message
+
+It's okay, the app is probably https://blog.heroku.com/app_sleeping_on_heroku[just being woken up after a power nap].
+
+If it doesn't respond in 30-45 seconds, take a look at the logs in Heroku UI or CLI (`heroku logs`).
