@@ -10,7 +10,7 @@ class AdminsRepository(
         val logger = LogManager.getLogger(AdminsRepository::class.java)!!
     }
 
-    fun getAllAdmins(): List<Long> {
+    fun allAdmins(): List<Long> {
         dataSource.connection.use { connection ->
             connection
                     .prepareStatement("SELECT * FROM admins;")

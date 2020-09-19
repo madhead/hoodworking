@@ -5,6 +5,7 @@ plugins {
     kotlin("jvm").version("1.4.10")
     application
     id("org.liquibase.gradle").version("2.0.4")
+    kotlin("plugin.serialization").version("1.4.10")
 }
 
 repositories {

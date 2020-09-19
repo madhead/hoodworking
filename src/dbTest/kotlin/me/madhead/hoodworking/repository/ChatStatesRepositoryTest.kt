@@ -1,5 +1,6 @@
 package me.madhead.hoodworking.repository
 
+import me.madhead.hoodworking.entity.chat.state.Started
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -8,12 +9,12 @@ import org.postgresql.ds.PGSimpleDataSource
 import java.lang.System.getenv as env
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class AdminsRepositoryTest {
-    lateinit var repository: AdminsRepository
+class ChatStatesRepositoryTest {
+    lateinit var repository: ChatStatesRepository
 
     @BeforeAll
     fun setUp() {
-        repository = AdminsRepository(
+        repository = ChatStatesRepository(
                 PGSimpleDataSource().apply {
                     setUrl("jdbc:postgresql://${env("POSTGRES_HOST")!!}:${env("POSTGRES_PORT")!!}/${env("POSTGRES_DB")!!}")
                     user = env("POSTGRES_USER")!!
@@ -23,10 +24,20 @@ class AdminsRepositoryTest {
     }
 
     @Test
-    fun `allAdmins() should return a list of admins`() {
+    fun `save() should return Started state correctly`() {
+        repository.save(Started(-1))
+
         Assertions.assertEquals(
-                listOf<Long>(1, 2, 3),
-                repository.allAdmins()
+                Started(-1),
+                repository.get(-1)
+        )
+    }
+
+    @Test
+    fun `get() should return correct Started state`() {
+        Assertions.assertEquals(
+                Started(1),
+                repository.get(1)
         )
     }
 }
