@@ -14,6 +14,8 @@ dependencies {
     implementation(platform("org.apache.logging.log4j:log4j-bom:2.13.3"))
 
     implementation("io.ktor:ktor-server-netty")
+    implementation("org.koin:koin-ktor:2.1.6")
+    implementation("com.github.insanusmokrassar:TelegramBotAPI:0.28.2")
     implementation("org.apache.logging.log4j:log4j-core")
     implementation("org.apache.logging.log4j:log4j-slf4j-impl")
 }
