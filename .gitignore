@@ -4,3 +4,4 @@ build
 .idea
 
 .env
+src/main/sql/seed.sql
