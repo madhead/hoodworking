@@ -1,0 +1,21 @@
+digraph "Hoodworking FSM" {
+    rankdir = LR;
+    node [shape = circle, style = filled, fillcolor = white];
+
+    START [fillcolor = black, label = ""];
+    END [shape = doublecircle, fillcolor = black, label = ""];
+    STARTED [label = "Started"];
+    HELPFULNESS1 [label = "Helpfulness1"];
+    HELPFULNESS2 [label = "Helpfulness2"];
+    HELPFULNESS3 [label = "Helpfulness3"];
+
+    START -> STARTED [label = "/start"];
+    STARTED -> END [label = "📋 Applications", color = red, fontcolor = red];
+    STARTED -> HELPFULNESS1 [label = "💁 I could help with…"];
+    HELPFULNESS1 -> HELPFULNESS2 [label = "<Name>"];
+    HELPFULNESS1 -> STARTED [label = "/start"];
+    HELPFULNESS2 -> HELPFULNESS3 [label = "<Description>"];
+    HELPFULNESS2 -> STARTED [label = "/start"];
+    HELPFULNESS3 -> END [label = "<Contact>"];
+    HELPFULNESS3 -> STARTED [label = "/start"];
+}
