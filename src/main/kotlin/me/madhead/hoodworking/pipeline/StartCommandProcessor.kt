@@ -21,7 +21,11 @@ class StartCommandProcessor(
         private val adminsRepository: AdminsRepository,
         private val chatStatesRepository: ChatStatesRepository,
 ) : UpdateProcessor {
-    override suspend fun process(update: Update): UpdateReaction? {
+    companion object {
+        val logger = LogManager.getLogger(StartCommandProcessor::class.java)!!
+    }
+
+    override suspend fun process(update: Update, chatState: ChatState?): UpdateReaction? {
         @Suppress("NAME_SHADOWING")
         val update = update as? MessageUpdate ?: return null
         val message = update.data as? CommonMessageImpl<*> ?: return null

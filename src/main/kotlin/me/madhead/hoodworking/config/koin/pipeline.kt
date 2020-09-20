@@ -8,14 +8,16 @@ val pipelineModule = module {
     single {
         StartCommandProcessor(
                 get(),
-                get()
+                get(),
+                get(),
         )
     }
     single {
         UpdateProcessingPipeline(
                 listOf(
                         get<StartCommandProcessor>(),
-                )
+                ),
+                get(),
         )
     }
 }
