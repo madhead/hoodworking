@@ -4,7 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-@SerialName("Started")
-data class Started(
+@SerialName("Helpfulness3")
+data class Helpfulness3(
         override val id: Long,
+        val name: String,
+        val description: String,
 ) : ChatState

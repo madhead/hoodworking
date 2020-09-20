@@ -1,5 +1,8 @@
 package me.madhead.hoodworking.repository
 
+import me.madhead.hoodworking.entity.chat.state.Helpfulness1
+import me.madhead.hoodworking.entity.chat.state.Helpfulness2
+import me.madhead.hoodworking.entity.chat.state.Helpfulness3
 import me.madhead.hoodworking.entity.chat.state.Started
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
@@ -24,7 +27,7 @@ class ChatStatesRepositoryTest {
     }
 
     @Test
-    fun `save() should return Started state correctly`() {
+    fun `save() should save Started state correctly`() {
         repository.save(Started(-1))
 
         Assertions.assertEquals(
@@ -38,6 +41,60 @@ class ChatStatesRepositoryTest {
         Assertions.assertEquals(
                 Started(1),
                 repository.get(1)
+        )
+    }
+
+    @Test
+    fun `save() should save Helpfulness1 state correctly`() {
+        repository.save(Helpfulness1(-2))
+
+        Assertions.assertEquals(
+                Helpfulness1(-2),
+                repository.get(-2)
+        )
+    }
+
+    @Test
+    fun `get() should return correct Helpfulness1 state`() {
+        Assertions.assertEquals(
+                Helpfulness1(2),
+                repository.get(2)
+        )
+    }
+
+    @Test
+    fun `save() should save Helpfulness2 state correctly`() {
+        repository.save(Helpfulness2(-3, "Darth Vader"))
+
+        Assertions.assertEquals(
+                Helpfulness2(-3, "Darth Vader"),
+                repository.get(-3)
+        )
+    }
+
+    @Test
+    fun `get() should return correct Helpfulness2 state`() {
+        Assertions.assertEquals(
+                Helpfulness2(3, "Darth Vader"),
+                repository.get(3)
+        )
+    }
+
+    @Test
+    fun `save() should save Helpfulness3 state correctly`() {
+        repository.save(Helpfulness3(-4, "Darth Vader", "Force choking"))
+
+        Assertions.assertEquals(
+                Helpfulness3(-4, "Darth Vader", "Force choking"),
+                repository.get(-4)
+        )
+    }
+
+    @Test
+    fun `get() should return correct Helpfulness3 state`() {
+        Assertions.assertEquals(
+                Helpfulness3(4, "Darth Vader", "Force choking"),
+                repository.get(4)
         )
     }
 }

@@ -9,6 +9,9 @@ interface ChatState {
         val serializers = SerializersModule {
             polymorphic(ChatState::class) {
                 subclass(Started::class)
+                subclass(Helpfulness1::class)
+                subclass(Helpfulness2::class)
+                subclass(Helpfulness3::class)
             }
         }
     }
