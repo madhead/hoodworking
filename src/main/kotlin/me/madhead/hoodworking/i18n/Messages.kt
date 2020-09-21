@@ -8,6 +8,9 @@ interface Messages {
     fun actionHelpfulness2Prompt(): String
     fun actionHelpfulness3Prompt(): String
     fun actionHelpfulnessFinish(): String
+
     fun actionApplications(): String
+    fun actionApplicationsEmpty(): String
+
     fun actionAdminApplications(): String
 }

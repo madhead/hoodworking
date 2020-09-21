@@ -5,6 +5,7 @@ import com.github.insanusmokrassar.TelegramBotAPI.extensions.api.answers.answerC
 import com.github.insanusmokrassar.TelegramBotAPI.extensions.api.deleteMessage
 import com.github.insanusmokrassar.TelegramBotAPI.extensions.api.send.sendMessage
 import com.github.insanusmokrassar.TelegramBotAPI.types.CallbackQuery.MessageDataCallbackQuery
+import com.github.insanusmokrassar.TelegramBotAPI.types.CommonUser
 import com.github.insanusmokrassar.TelegramBotAPI.types.ParseMode.MarkdownV2
 import com.github.insanusmokrassar.TelegramBotAPI.types.update.CallbackQueryUpdate
 import com.github.insanusmokrassar.TelegramBotAPI.types.update.abstracts.Update
@@ -12,9 +13,11 @@ import com.github.insanusmokrassar.TelegramBotAPI.utils.extensions.escapeMarkdow
 import kotlinx.coroutines.delay
 import me.madhead.hoodworking.entity.chat.state.ChatState
 import me.madhead.hoodworking.entity.chat.state.Started
+import me.madhead.hoodworking.i18n.I18N
 import me.madhead.hoodworking.repository.ApplicationsRepository
 import me.madhead.hoodworking.repository.ChatStatesRepository
 import org.apache.logging.log4j.LogManager
+import java.util.Locale
 
 class ApplicationsCallbackProcessor(
         private val requestsExecutor: RequestsExecutor,
@@ -38,7 +41,10 @@ class ApplicationsCallbackProcessor(
             return null
         }
 
-        logger.debug("Processing callback for {}", callbackQuery.user)
+        val user = callbackQuery.user as? CommonUser ?: return null
+        val locale = Locale(user.languageCode)
+
+        logger.debug("Processing callback for {}", user)
 
         return {
             requestsExecutor.answerCallbackQuery(
@@ -46,17 +52,27 @@ class ApplicationsCallbackProcessor(
             )
             requestsExecutor.deleteMessage(callbackQuery.message)
             chatStatesRepository.delete(callbackQuery.user.id.chatId)
-            for (application in applicationsRepository.get(callbackQuery.user.id.chatId)) {
+
+            val applications = applicationsRepository.get(callbackQuery.user.id.chatId)
+
+            if (applications.isEmpty()) {
                 requestsExecutor.sendMessage(
                         chat = callbackQuery.message.chat,
-                        text = """
+                        text = I18N.messages(locale).actionApplicationsEmpty()
+                )
+            } else {
+                for (application in applications) {
+                    requestsExecutor.sendMessage(
+                            chat = callbackQuery.message.chat,
+                            text = """
                             *${application.helpfulness.escapeMarkdownV2Common()}*
 
                             ${application.userName.escapeMarkdownV2Common()} / ${application.contact.escapeMarkdownV2Common()}
                         """.trimIndent(),
-                        parseMode = MarkdownV2
-                )
-                delay(100)
+                            parseMode = MarkdownV2
+                    )
+                    delay(100)
+                }
             }
         }
     }

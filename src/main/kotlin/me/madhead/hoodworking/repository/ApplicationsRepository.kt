@@ -80,4 +80,43 @@ class ApplicationsRepository(
                     }
         }
     }
+
+    fun allApplications(): List<Application> {
+        dataSource.connection.use { connection ->
+            connection
+                    .prepareStatement("SELECT * FROM applications;")
+                    .use { preparedStatement ->
+                        preparedStatement.executeQuery().use { resultSet ->
+                            return resultSet.use {
+                                generateSequence {
+                                    if (resultSet.next()) {
+                                        Application(
+                                                id = resultSet.getString(1),
+                                                userId = resultSet.getLong(2),
+                                                userName = resultSet.getString(3),
+                                                helpfulness = resultSet.getString(4),
+                                                contact = resultSet.getString(5)
+                                        )
+                                    } else {
+                                        null
+                                    }
+                                }.toList()
+                            }
+                        }
+                    }
+        }
+    }
+
+    fun delete(id: String) {
+        dataSource
+                .connection
+                .use { connection ->
+                    connection
+                            .prepareStatement("DELETE FROM applications WHERE id = ?;")
+                            .use { preparedStatement ->
+                                preparedStatement.setString(1, id)
+                                preparedStatement.executeUpdate()
+                            }
+                }
+    }
 }

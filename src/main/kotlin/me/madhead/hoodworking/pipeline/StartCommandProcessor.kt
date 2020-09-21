@@ -1,6 +1,7 @@
 package me.madhead.hoodworking.pipeline
 
 import com.github.insanusmokrassar.TelegramBotAPI.bot.RequestsExecutor
+import com.github.insanusmokrassar.TelegramBotAPI.extensions.api.deleteMessage
 import com.github.insanusmokrassar.TelegramBotAPI.extensions.api.send.sendMessage
 import com.github.insanusmokrassar.TelegramBotAPI.types.CommonUser
 import com.github.insanusmokrassar.TelegramBotAPI.types.MessageEntity.textsources.BotCommandTextSource
@@ -48,7 +49,7 @@ class StartCommandProcessor(
                         ),
                         CallbackDataInlineKeyboardButton(
                                 text = I18N.messages(locale).actionApplications(),
-                                callbackData = "Applications"
+                                callbackData = ApplicationsCallbackProcessor.CALLBACK_DATA
                         )
                 )
         )
@@ -63,6 +64,7 @@ class StartCommandProcessor(
         }
 
         return {
+            requestsExecutor.deleteMessage(message)
             requestsExecutor.sendMessage(
                     chat = message.chat,
                     text = I18N.messages(locale).chooseAnAction(),

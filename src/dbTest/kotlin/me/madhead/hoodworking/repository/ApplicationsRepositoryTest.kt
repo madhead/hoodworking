@@ -58,4 +58,16 @@ class ApplicationsRepositoryTest {
                 repository.get(0)
         )
     }
+
+    @Test
+    fun `allApplications() should return all applications`() {
+        Assertions.assertEquals(
+                listOf(
+                        Application("test1", 1, "Darth Vader", "Force choking", "@annie_the_dustboy"),
+                        Application("test2", 1, "Darth Vader", "Jedi hunting", "@annie_the_dustboy"),
+                        Application("test3", 2, "Lil Yo", "Protecting you from mudhorns and scam", "@YodaKid2019"),
+                ),
+                repository.allApplications()
+        )
+    }
 }

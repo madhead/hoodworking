@@ -35,6 +35,7 @@ dependencies {
     implementation("com.github.insanusmokrassar:TelegramBotAPI:0.28.2")
     implementation("com.github.rodionmoiseev.c10n:c10n-core:1.3")
     implementation("org.postgresql:postgresql:42.2.16")
+    implementation("org.apache.commons:commons-csv:1.8")
     implementation("org.apache.logging.log4j:log4j-core")
     implementation("org.apache.logging.log4j:log4j-slf4j-impl")
 
