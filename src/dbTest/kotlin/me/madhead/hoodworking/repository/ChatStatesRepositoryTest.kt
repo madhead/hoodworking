@@ -97,4 +97,18 @@ class ChatStatesRepositoryTest {
                 repository.get(4)
         )
     }
+
+    @Test
+    fun `delete() should delete states`() {
+        repository.save(Started(0))
+
+        Assertions.assertEquals(
+                Started(0),
+                repository.get(0)
+        )
+
+        repository.delete(0)
+
+        Assertions.assertNull(repository.get(0))
+    }
 }

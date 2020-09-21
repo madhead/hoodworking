@@ -52,4 +52,17 @@ class ChatStatesRepository(
                     }
         }
     }
+
+    fun delete(id: Long) {
+        dataSource
+                .connection
+                .use { connection ->
+                    connection
+                            .prepareStatement("DELETE FROM chat_states WHERE id = ?;")
+                            .use { preparedStatement ->
+                                preparedStatement.setLong(1, id)
+                                preparedStatement.executeUpdate()
+                            }
+                }
+    }
 }
