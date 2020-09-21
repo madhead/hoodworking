@@ -39,4 +39,23 @@ class ApplicationsRepositoryTest {
                 repository.get("test1")
         )
     }
+
+    @Test
+    fun `get() should return all user's applications`() {
+        Assertions.assertEquals(
+                listOf(
+                        Application("test1", 1, "Darth Vader", "Force choking", "@annie_the_dustboy"),
+                        Application("test2", 1, "Darth Vader", "Jedi hunting", "@annie_the_dustboy"),
+                ),
+                repository.get(1)
+        )
+    }
+
+    @Test
+    fun `get() should return empty list for user without applications`() {
+        Assertions.assertEquals(
+                emptyList<Application>(),
+                repository.get(0)
+        )
+    }
 }
