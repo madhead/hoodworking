@@ -3,6 +3,7 @@ package me.madhead.hoodworking.config.koin
 import io.ktor.config.ApplicationConfig
 import io.ktor.util.KtorExperimentalAPI
 import me.madhead.hoodworking.repository.AdminsRepository
+import me.madhead.hoodworking.repository.ApplicationsRepository
 import me.madhead.hoodworking.repository.ChatStatesRepository
 import org.koin.dsl.module
 import org.postgresql.ds.PGSimpleDataSource
@@ -27,5 +28,9 @@ val dbModule = module {
 
     single {
         ChatStatesRepository(get())
+    }
+
+    single {
+        ApplicationsRepository(get())
     }
 }

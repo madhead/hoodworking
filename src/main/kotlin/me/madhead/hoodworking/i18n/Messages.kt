@@ -3,6 +3,11 @@ package me.madhead.hoodworking.i18n
 interface Messages {
     fun chooseAnAction(): String
 
-    fun actionICouldHelp(): String
+    fun actionHelpfulness1(): String
+    fun actionHelpfulness1Prompt(): String
+    fun actionHelpfulness2Prompt(): String
+    fun actionHelpfulness3Prompt(): String
+    fun actionHelpfulnessFinish(): String
+    fun actionApplications(): String
     fun actionAdminApplications(): String
 }

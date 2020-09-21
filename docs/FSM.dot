@@ -10,7 +10,6 @@ digraph "Hoodworking FSM" {
     HELPFULNESS3 [label = "Helpfulness3"];
 
     START -> STARTED [label = "/start"];
-    STARTED -> END [label = "📋 Applications", color = red, fontcolor = red];
     STARTED -> HELPFULNESS1 [label = "💁 I could help with…"];
     HELPFULNESS1 -> HELPFULNESS2 [label = "<Name>"];
     HELPFULNESS1 -> STARTED [label = "/start"];
@@ -18,4 +17,6 @@ digraph "Hoodworking FSM" {
     HELPFULNESS2 -> STARTED [label = "/start"];
     HELPFULNESS3 -> END [label = "<Contact>"];
     HELPFULNESS3 -> STARTED [label = "/start"];
+    STARTED -> END [label = "📝 My applications"];
+    STARTED -> END [label = "📋 Download applications", color = red, fontcolor = red];
 }

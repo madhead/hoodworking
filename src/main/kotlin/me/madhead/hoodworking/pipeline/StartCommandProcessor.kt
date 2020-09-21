@@ -10,10 +10,12 @@ import com.github.insanusmokrassar.TelegramBotAPI.types.message.CommonMessageImp
 import com.github.insanusmokrassar.TelegramBotAPI.types.message.content.TextContent
 import com.github.insanusmokrassar.TelegramBotAPI.types.update.MessageUpdate
 import com.github.insanusmokrassar.TelegramBotAPI.types.update.abstracts.Update
+import me.madhead.hoodworking.entity.chat.state.ChatState
 import me.madhead.hoodworking.entity.chat.state.Started
 import me.madhead.hoodworking.i18n.I18N
 import me.madhead.hoodworking.repository.AdminsRepository
 import me.madhead.hoodworking.repository.ChatStatesRepository
+import org.apache.logging.log4j.LogManager
 import java.util.Locale
 
 class StartCommandProcessor(
@@ -34,12 +36,19 @@ class StartCommandProcessor(
         content.entities.singleOrNull { "start" == (it.source as? BotCommandTextSource)?.command } ?: return null
 
         val user = message.user as? CommonUser ?: return null
+
+        logger.debug("Processing command for {}", user)
+
         val locale = Locale(user.languageCode)
         val keyboard = mutableListOf(
                 listOf(
                         CallbackDataInlineKeyboardButton(
-                                text = I18N.messages(locale).actionICouldHelp(),
-                                callbackData = "ICouldHelp"
+                                text = I18N.messages(locale).actionHelpfulness1(),
+                                callbackData = ICouldHelpCallbackProcessor.CALLBACK_DATA
+                        ),
+                        CallbackDataInlineKeyboardButton(
+                                text = I18N.messages(locale).actionApplications(),
+                                callbackData = "Applications"
                         )
                 )
         )
@@ -48,7 +57,7 @@ class StartCommandProcessor(
             keyboard += listOf(
                     CallbackDataInlineKeyboardButton(
                             text = I18N.messages(locale).actionAdminApplications(),
-                            callbackData = "AdminApplications"
+                            callbackData = AdminApplicationsCallbackProcessor.CALLBACK_DATA
                     )
             )
         }
