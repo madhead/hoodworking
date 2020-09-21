@@ -9,7 +9,13 @@ databaseChangeLog:
         - sqlFile:
             path: ../sql/chat_states.init.sql
             relativeToChangelogFile: true
+        - sqlFile:
+            path: ../sql/applications.init.sql
+            relativeToChangelogFile: true
       rollback:
+        - sqlFile:
+            path: ../sql/applications.deinit.sql
+            relativeToChangelogFile: true
         - sqlFile:
             path: ../sql/chat_states.deinit.sql
             relativeToChangelogFile: true
