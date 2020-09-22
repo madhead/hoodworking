@@ -12,6 +12,7 @@ interface ChatState {
                 subclass(Helpfulness1::class)
                 subclass(Helpfulness2::class)
                 subclass(Helpfulness3::class)
+                subclass(RemovingApplication::class)
             }
         }
     }

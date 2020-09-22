@@ -8,6 +8,11 @@ digraph "Hoodworking FSM" {
     HELPFULNESS1 [label = "Helpfulness1"];
     HELPFULNESS2 [label = "Helpfulness2"];
     HELPFULNESS3 [label = "Helpfulness3"];
+    REMOVING_APPLICATION [label = "RemovingApplication"];
+
+    START -> REMOVING_APPLICATION [label = "❌ Delete application"];
+    REMOVING_APPLICATION -> END;
+    REMOVING_APPLICATION -> STARTED [label = "/start"];
 
     START -> STARTED [label = "/start"];
     STARTED -> HELPFULNESS1 [label = "💁 I could help with…"];

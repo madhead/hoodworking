@@ -7,6 +7,8 @@ import com.github.insanusmokrassar.TelegramBotAPI.extensions.api.send.sendMessag
 import com.github.insanusmokrassar.TelegramBotAPI.types.CallbackQuery.MessageDataCallbackQuery
 import com.github.insanusmokrassar.TelegramBotAPI.types.CommonUser
 import com.github.insanusmokrassar.TelegramBotAPI.types.ParseMode.MarkdownV2
+import com.github.insanusmokrassar.TelegramBotAPI.types.buttons.InlineKeyboardButtons.CallbackDataInlineKeyboardButton
+import com.github.insanusmokrassar.TelegramBotAPI.types.buttons.InlineKeyboardMarkup
 import com.github.insanusmokrassar.TelegramBotAPI.types.update.CallbackQueryUpdate
 import com.github.insanusmokrassar.TelegramBotAPI.types.update.abstracts.Update
 import com.github.insanusmokrassar.TelegramBotAPI.utils.extensions.escapeMarkdownV2Common
@@ -69,7 +71,17 @@ class ApplicationsCallbackProcessor(
 
                             ${application.userName.escapeMarkdownV2Common()} / ${application.contact.escapeMarkdownV2Common()}
                         """.trimIndent(),
-                            parseMode = MarkdownV2
+                            parseMode = MarkdownV2,
+                            replyMarkup = InlineKeyboardMarkup(
+                                    keyboard = listOf(
+                                            listOf(
+                                                    CallbackDataInlineKeyboardButton(
+                                                            I18N.messages(locale).actionApplicationsRemove(),
+                                                            "${ApplicationRemoveCallbackProcessor.CALLBACK_DATA_PREFIX}:${application.id}"
+                                                    )
+                                            )
+                                    )
+                            )
                     )
                     delay(100)
                 }

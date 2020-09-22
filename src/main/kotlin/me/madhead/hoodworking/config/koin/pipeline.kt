@@ -1,6 +1,8 @@
 package me.madhead.hoodworking.config.koin
 
 import me.madhead.hoodworking.pipeline.AdminApplicationsCallbackProcessor
+import me.madhead.hoodworking.pipeline.ApplicationRemoveCallbackProcessor
+import me.madhead.hoodworking.pipeline.ApplicationRemoveConformationCallbackProcessor
 import me.madhead.hoodworking.pipeline.ApplicationsCallbackProcessor
 import me.madhead.hoodworking.pipeline.ContactMessageProcessor
 import me.madhead.hoodworking.pipeline.HelpfulnessMessageProcessor
@@ -59,12 +61,27 @@ val pipelineModule = module {
         )
     }
     single {
+        ApplicationRemoveCallbackProcessor(
+                get(),
+                get(),
+        )
+    }
+    single {
+        ApplicationRemoveConformationCallbackProcessor(
+                get(),
+                get(),
+                get(),
+        )
+    }
+    single {
         UpdateProcessingPipeline(
                 listOf(
                         get<StartCommandProcessor>(),
                         get<ICouldHelpCallbackProcessor>(),
                         get<ApplicationsCallbackProcessor>(),
                         get<AdminApplicationsCallbackProcessor>(),
+                        get<ApplicationRemoveCallbackProcessor>(),
+                        get<ApplicationRemoveConformationCallbackProcessor>(),
                         get<NameMessageProcessor>(),
                         get<HelpfulnessMessageProcessor>(),
                         get<ContactMessageProcessor>(),

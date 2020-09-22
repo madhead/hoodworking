@@ -11,6 +11,9 @@ interface Messages {
 
     fun actionApplications(): String
     fun actionApplicationsEmpty(): String
+    fun actionApplicationsRemove(): String
+    fun actionApplicationsRemovePrompt(): String
+    fun actionApplicationsRemoved(): String
 
     fun actionAdminApplications(): String
 }
