@@ -1,0 +1,23 @@
+{
+	"update_id": 1,
+	"message": {
+		"message_id": 1,
+		"from": {
+			"id": 1,
+			"first_name": "Luke"
+		},
+		"chat": {
+			"id": 1,
+			"type": "private"
+		},
+		"date": 1600637422,
+		"text": "/start",
+		"entities": [
+			{
+				"offset": 0,
+				"length": 6,
+				"type": "bot_command"
+			}
+		]
+	}
+}

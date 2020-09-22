@@ -1,0 +1,20 @@
+<Configuration status="WARN" shutdownHook="disable">
+	<Appenders>
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout>
+				<pattern>
+					%d{ISO8601}{UTC} [%-5p] [%t] [%c{1.}]: %m%n
+				</pattern>>
+			</PatternLayout>
+		</Console>
+	</Appenders>
+
+	<Loggers>
+		<Logger name="me.madhead.hoodworking" level="${env:HOODWORKING_LOG_THRESHOLD:-INFO}" additivity="false">
+			<AppenderRef ref="STDOUT"/>
+		</Logger>
+		<Root level="${env:HOODWORKING_LOG_ROOT_THRESHOLD:-WARN}">
+			<AppenderRef ref="STDOUT"/>
+		</Root>
+	</Loggers>
+</Configuration>

@@ -1,0 +1,12 @@
+{
+	"update_id": 1,
+	"inline_query": {
+		"id": "",
+		"from": {
+			"id": 1,
+			"first_name": "Luke"
+		},
+		"query": "",
+		"offset": ""
+	}
+}
